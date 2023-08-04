@@ -163,7 +163,7 @@ const compareArrObj = (arr1, arr2) => { // anonymous function that has array 1 a
             return false
         }
         for (let prop in arr1[i]) { // for every object entry...
-            if (arr1[i][prop] !== arr2[i][prop]) { // if the value of each key in array 1is different from the 
+            if (arr1[i][prop] !== arr2[i][prop]) { // if the value of each key in array 1 is different from the 
                                                    // value of the corresponding key in element i object of array 2 return false
                 return false
             }
@@ -171,6 +171,8 @@ const compareArrObj = (arr1, arr2) => { // anonymous function that has array 1 a
     }
     return true // otherwise return true
 }
+
+console.log('do the two albulm arrays contain the same objects?', compareArrObj(albums1, albums2))
 /**7. The Spread Operator vs the Rest Parameter */
 /**8. Destructuring Assignment */
 /**9. How to Add and Remove Elements from an Array */
