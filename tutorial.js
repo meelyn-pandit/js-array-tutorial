@@ -366,7 +366,58 @@ console.log('compare arrays a and b with compareEvery callback function', compar
 // returns false because a[1] and b[1] are not equal
 
 /**13. How to Copy an Array */
+// all copy operations generate a shallow copy (copy whose properties share the same references) so changes to the original
+// or the copy will change the other) of the original array
+// slice() method - takes the starting index and final index (but final index is not included) to copy
+// -- when called without arguments, slice() creates a duplicate of the whole array
 
+let dough = ['flour', 'water', 'yeast', 'salt']
+let doughCopy = dough.slice() // creating doughCopy allows you to mutate it without affecting dough array
+console.log(doughCopy)
+
+doughCopy[1] = 'wine'
+console.log('doughCopy after mutating', doughCopy)
+console.log('original dough array', dough)// original dough array is not affected by mutating doughCopy
+
+// When working with objects, creating a copy with slice() will create a shallow copy and editing the original will affect the copy
+albums = [
+    {artist: 'Frank Zappa', title: 'Apostorphe'},
+    {artist: 'Frank Zappa', title: 'One Size fits All'},
+]
+
+let albumsCopy = albums.slice()
+albumsCopy[1]['title'] = 'Absolutely Free'
+console.log('albums post-slice of albums copy', albums)
+console.log('albums copy post-slice', albumsCopy)
+// both arrays are mutated even though we only changed element 1 in albumsCopy
+
+//reassigning an element to a different object (not mutating or using slice()) the modification does
+// not invlove the other array
+albumsCopy[1] = {artist: 'Captain Beefheart',
+                 title: 'Safe as Milk'}
+console.log('albumsCopy mutated with reassigned', albumsCopy)
+console.log('albums after albumsCopy mutated', albums)
+// albums not affected with reassigned element in albumsCopy
+
+// How to use the map() method
+// map() method generates a new array containing the result of calling a callback function on every
+// element of an array
+// -- map() is a good way to mutate elements within arrays
+albums = [
+    {artist: 'Frank Zappa', title: 'Apostorphe'},
+    {artist: 'Frank Zappa', title: 'One Size Fits All'}
+]
+
+let mapAlbums = albums.map(element => element) // instead of mutating the element, we are just calling the element
+console.log('mapAlbums', mapAlbums)
+
+// How to Create a Deep Copy
+// to createa a deep clone of an array, convert array into a string with JSon.stringify() and pass its return
+// value to the JSON.parse() method
+albumsCopy = JSON.parse(JSON.stringify(albums))
+console.log('deep copy albumsCopy', albumsCopy)
+// this albums copy will be completely independent of the original array and there will be no
+// unintended risk of modification
 
 /**14. How to Search Inside an Array */
 /**15. How to Check if Array Elements Meet a Condition */
