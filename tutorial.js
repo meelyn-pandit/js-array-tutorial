@@ -173,7 +173,111 @@ const compareArrObj = (arr1, arr2) => { // anonymous function that has array 1 a
 }
 
 console.log('do the two albulm arrays contain the same objects?', compareArrObj(albums1, albums2))
+
 /**7. The Spread Operator vs the Rest Parameter */
+// the spread opperator and rest parameter have similar syntax (...) but they perform fundamentally different operations.
+
+// spread operator enables you to expand an array (an iterable object) into its elements
+// -- they can also add modified variables to objects within an array!
+
+// rest parameter allows you to collect an undefined number of arguments into a single array
+
+// How to use the spread Operator
+let alkali = ['Li', 'Na', 'K']
+let alkEarth = ['Be', 'Mg', 'Ca']
+
+let metals = [...alkali, ...alkEarth] // merging the two arrays together with spread operator
+console.log(metals)
+
+// Can use spread operator to create a copy of an array
+let metalsCopy = [...metals]
+console.log('copy of metals array', metalsCopy)
+
+// How to Use the Rest Parameter
+//The rest parameter allows you to collect an undefined number of elements into a single array.
+//-- a function can only have one rest parameter
+//--the rest parameter needs to be the last in a sequence of function parameters
+
+function f1(first, second, third, ...others) {
+    console.log('first element', first)
+    console.log('second element', second)
+    console.log('third element', third)
+    console.log('all other elements', others)
+}
+
+f1('He', 'Ne', 'Ar', 'Kr', 'Xn', 'Rn') // basically takes the last 3 elements and puts them in their own array
+
+// the rest parameter provies a way to easily access the arguments passed to a functin in array form, instead of using the arguments object:
+function f2(...args) {
+    console.log('second rest example', args)
+}
+
+f2('He', 'Ne', 'Ar', 'Kr', 'Xn', 'Rn') // creates an array from all of these elements
+
 /**8. Destructuring Assignment */
+// destructuring syntax provides a simple way to assign values by unpacking them from an array object
+// let nobleGases3 = ['He', 'Ne', 'Ar', 'Kr', 'Xn']
+let [firstRow, secondRow,,FourthRow] = nobleGases
+console.log('first row', firstRow)
+console.log('second row', secondRow)
+console.log('fourth row', FourthRow)
+
+/////////////////////////////////////////////////////////
+// Common Array Methods in JS //
+//////////////////////////////////////
+// in js arrays are objects and possess properties and methods
+
 /**9. How to Add and Remove Elements from an Array */
+// push() method - appends the end of array
+nobleGases.push('Rn')
+console.log('updated noble gasses array', nobleGases) // double instances of Rn
+
+// you can append multiple elements with push() indicating their values separated by a comma
+let halogens = ['F', 'Cl']
+console.log('halogens array', halogens)
+
+halogens.push('Br', 'I', 'At')
+console.log('updated halogens array', halogens)
+
+// similar to push(), the unshift() method adds one or more leements to the beginning of an array
+// and returns the length of the modified array
+
+let halogens2 = ['F', 'Cl']
+console.log('halogens2 array', halogens2)
+
+halogens2.unshift('Br', 'I', 'At')
+console.log('updated halogens2 array', halogens2) // adds new elements to the beginning of array
+
+// pop() method - remove last element of array
+nobleGases.pop() // removes the second Rn in array
+console.log('nobleGases after popped', nobleGases)
+
+// shift() method - removes the first element from an array and returns it
+nobleGases.shift()
+console.log('nobleGases after shifted', nobleGases) // removes the first element, in this case He
+
+// splice() method - remove one or more elements from a specific position of an array
+nobleGases = ['He', 'Ne', 'Ar', 'Kr', 'Xn', 'Rn'];
+console.log('pre-spliced noblelGases', nobleGases)
+nobleGases.splice(1,3) // first parameter of splice is the starting index, second is the number of items
+                       // to remove from the array, removes Ne, Ar, Kr
+console.log('spliced nobleGases', nobleGases) // removes the Ne, Ar, and Kr elements because Ne is the element in the 
+                                              // 1 spot (2nd element in array), and removes 3 elements total (Ne, Ar, Kr)
+
+// can also use .splice() to add elements into the array, without removing any elements
+nobleGases = ['He', 'Ne', 'Rn']
+console.log('pre-splice added nobleGases', nobleGases)
+
+nobleGases.splice(2, 0, 'Ar', 'Kr', 'Xn') // adds Ar, Kr, and Xn elements before index 2 (Rn)
+console.log('post-slice added nobleGases', nobleGases)
+
+
 /**10. How to Combine Arrays */
+/**11. How to Convert an Array into a String */
+/**12. How to Compare Arrays */
+/**13. How to Copy an Array */
+/**14. How to Search Inside an Array */
+/**15. How to Check if Array Elements Meet a Condition */
+/**16. How to Sort an Array */
+/**17. How to Perform an Operation on Every Array Element */
+/**18. Conclusion */
