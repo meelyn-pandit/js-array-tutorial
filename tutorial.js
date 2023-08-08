@@ -271,11 +271,103 @@ console.log('pre-splice added nobleGases', nobleGases)
 nobleGases.splice(2, 0, 'Ar', 'Kr', 'Xn') // adds Ar, Kr, and Xn elements before index 2 (Rn)
 console.log('post-slice added nobleGases', nobleGases)
 
-
 /**10. How to Combine Arrays */
+// concat() method - combine two or more arrays, does not change the original arrays and returns a new array
+alkali = ['Li', 'Na', 'K']
+console.log('pre concat alkali array', alkali)
+
+let moreAlkali = ['Rb', 'Cs', 'Fr']
+alkEarth = ['Be', 'Mg', 'Ca']
+
+alkali.concat(moreAlkali)
+console.log('post concat alkali array', alkali.concat(moreAlkali))
+
+alkali.concat(moreAlkali, alkEarth)
+console.log('post concat moreAlkali and alkEarth', alkali.concat(moreAlkali, alkEarth))
+// alkali array stays the same if console logged again
+console.log('alkali should be unedited', alkali)
+
+// push() method changes the original array with ... spread operator
+alkali.push(...moreAlkali)
+console.log('post push alkali', alkali) // alkali array is modified
+
+// you cannot use the push() method without the spread syntax in its arguments
+// -- otherwise the moreAlkali array would be nested within the alkali array
+alkali = ['Li', 'Na', 'K']
+alkali.push(moreAlkali)
+console.log('alkali array post push without spread operator', alkali) // [ 'Li', 'Na', 'K', [ 'Rb', 'Cs', 'Fr' ] ]
+
+// spread operator can also merge two arrays without mutating the original array
+alkali = ['Li', 'Na', 'K']
+metals = [...alkali, ...alkEarth]
+console.log('metals array after joined with spread operator', metals)
+console.log('alkali array after spread operator', alkali)
+
 /**11. How to Convert an Array into a String */
+// toString() and join() methods - do not mutate the original array
+//-- join() method takes an argument, the separator
+
+let animals = ['pig', 'dog', 'sheep']
+console.log('animals to string', animals.toString())
+console.log('animals join with comma', animals.join(','))
+console.log('animals join with space', animals.join(' '))
+console.log('animals.join with star', animals.join(' * '))
+
+// there are some limitations:
+let arr = [1, 'two', null, undefined, true, {}]
+console.log('array to string', arr.toString())
+console.log('array join', arr.join())
+
+// the null and undefined are not console.logged and the string representation of the object is [object Object]
+// to convert an array containing objects into a string, need to employ another method
+
+// JSON.stringify() method converts array with objects into a string
+let albums = [
+    {
+        artist: 'frank zappa',
+        title: 'over-nite sensation',
+        year: 1973,
+    },
+    {
+        artist: 'frank zappa',
+        title: 'apostrophe',
+        year: 1974,
+    },
+    {
+        artist: 'frank zappa',
+        title: 'one size fits all',
+        year: 1975,
+    },
+]
+
+console.log('albums json stringify', JSON.stringify(albums)) // square brackets are retained in string
+
 /**12. How to Compare Arrays */
+let a = [1, null, 3]
+let b = [1, undefined, 3]
+
+console.log('array comparison indexing', a[1] === b[1]) // returns false because null does not equal undefined
+
+console.log('array comparison json stringify', JSON.stringify(a) === JSON.stringify(b)) // returns true
+
+// when undefined is stringified it is null
+
+// to avoid this issue it would be better to use an interave technique to compare elements between
+// two different arrays
+
+// every() method is an iterative method that verifies if all the elements in the array pass a condition
+// implemented by a callback function and it returns true or false
+const compareEvery = (arr1, arr2) => {
+    return arr1.length === arr2.length && // AND operator ensures that true is returned only when both conditiosn are true
+    arr1.every((elem, index) => elem === arr2[index])
+}
+
+console.log('compare arrays a and b with compareEvery callback function', compareEvery(a,b))
+// returns false because a[1] and b[1] are not equal
+
 /**13. How to Copy an Array */
+
+
 /**14. How to Search Inside an Array */
 /**15. How to Check if Array Elements Meet a Condition */
 /**16. How to Sort an Array */
