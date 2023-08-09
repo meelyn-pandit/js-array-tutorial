@@ -420,7 +420,87 @@ console.log('deep copy albumsCopy', albumsCopy)
 // unintended risk of modification
 
 /**14. How to Search Inside an Array */
+// includes() method - used to know whether a value is included in an array
+// -- pass the value you are interested in as the argument
+let dMinor = ['D', 'E', 'F', 'G', 'A', 'B', 'C']
+
+console.log('d minor', dMinor.includes('E')) // begins search at index 0 so therefore returns true
+console.log('d minor', dMinor.includes('E', 2)) // begins search at index 2 so therefore returns false
+
+// indexOf() method - determine the index at which a specific value can be found in an array
+// -- returns only the first index at which the specified value is found, otherwise it returns -1
+
+console.log('d minor indexOf starting at 0', dMinor.indexOf('E')) // returns 1 because E is at index 1
+console.log('d minor indexOf starting at 2', dMinor.indexOf('E', 2)) // returns -1 because E is at index 1 and search starts at index 2
+
+// find and findLast() methods - search for the first and last element that satisfies a certain condition in an array
+// -- both accept a callback function, parameters are current element, its index, and the array 
+// -- returns first, last, element or undefined if no value matches the specified condition.
+animals = [
+    {no: 1, track: 'Pigs on the Wing (Part One)'},
+    {no: 2, track: 'Dogs'},
+    {no: 3, track: 'Pigs (Three Different Ones'},
+    {no: 4, track: 'Sheep'},
+    {no: 5, track: 'Pigs on the Wing (Part Two)'},
+]
+console.log('finds first element with Pigs in it', animals.find(el => el['track'].includes('Pigs')))
+
+// FINDLAST IS NOT WORKING ON NODE!!!
+// console.log('finds last element with Pigs in it', animals.findLast(el => el['track'].includes('Pigs')))
+
+console.log('finds the element with Horses in it, but no horses in array', animals.find(el => el['track'].includes('Horses')))
+// in nodejs it outputs undefined...
+
 /**15. How to Check if Array Elements Meet a Condition */
+// every() method loops through the array and returns true if all the elements...
+// meet a specified condition, otherwise it returns false
+nobleGases = [ 'He', 'Ne', 'Ar', 'Kr', 'Xn']
+console.log('every method', nobleGases.every(el => typeof el == 'string')) // every element is a string so true
+
+// some() method is similar, it iterates through the array testing if some elements - not all of them...
+// meet requirements implemented by a callback function
+console.log('some methdod 1', nobleGases.some(el => el == 'Ar')) // at least one element is Ar so true
+
+console.log('some method 2', nobleGases.some(el => el == 'Rn')) // none of the elements are Rn so false
+
+// filter method = filter the array elements that satisfy a certain criterion
+// -- takes a callback function, whose parameters are the current element, its index and the array
+
+console.log('animals array filter', animals.filter(el => el['track'].includes('Pigs')))
+// creats a shallow copy of the original array containing only the values for which the callback returns a truthy value...
+//... and it neglects others
+
+console.log('animals array filter', animals.filter(el => el['track'].includes('Horses')))
+// creats an empty array
+
 /**16. How to Sort an Array */
+// sort() method sorts the array elements in place and changes the array which it is acting on
+
+// pass sort() as a callback function so elements can be sorted according to the return value of the callback
+
+// Sort Table
+// (A,B) Comparison Return Value | Order
+//             > 0               | [b,a]
+//             < 0               | [a,b]
+//           === 0               | original order
+
+// the elements, represented by a and b parameters are compared two at a time. If the return value is positive...
+//... a is placed after b. If it is negative, b is placed after a. while is the return value is zero, the...
+//... original order is kept
+
+nobleGases = ['He', 'Ne', 'Ar', 'Kr', 'Xn', 'Rn']
+
+console.log('noble gases sorted in ascending order', nobleGases.sort((a,b) => {
+    return a === b ? 0 : a > b ? 1 : -1
+})) // sorted alphabetically ascending
+
+console.log('noble gases sorted in descending order', nobleGases.sort((a,b) => {
+    return a === b ? 0 : a < b ? 1 : -1
+})) // sorted alphabetically descending
+
+// the callback function is implemented by a tenerary operator in order to consider all 3 outcomes...
+//... equal to, greater than, or less than
+
+
 /**17. How to Perform an Operation on Every Array Element */
 /**18. Conclusion */
