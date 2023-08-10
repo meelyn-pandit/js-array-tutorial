@@ -503,4 +503,41 @@ console.log('noble gases sorted in descending order', nobleGases.sort((a,b) => {
 
 
 /**17. How to Perform an Operation on Every Array Element */
+// map() method - can perform many different operations with callback functions 
+console.log('original animals array', animals)
+let tracks = animals.map(el => el['track']) // map function creates an array populated with just the tracks, no number key/value
+console.log(tracks)
+
+// forEach() method - similar to map(), executes a function on every array element, but has no return value...
+//...for this reason, a forEach() call can be used only at the end of a chain
+// -- would need to use a return to get the output
+console.log('forEach original animals array', animals)
+animals.forEach(el => delete el['no'])
+console.log('forEach animals array after forEach', animals) // edits original array, deletes number key/value
+
+// reduce() method - accepts a callback function which is executed on each array element.
+// -- the callback takes an accumulator as the first parameter, followed by the current element, its index, and array
+// -- the return value of each iteration is passed to the next one, so that the array is reduced to a single value
+// ---- the second parameter of reduce() is the starting value of the accumulator...
+// ---- if not specified the accumulator takes the first array value and the iteration starts at index 1
+animals = [
+    {no: 1, track: 'Pigs on the Wing (Part One)'},
+    {no: 2, track: 'Dogs'},
+    {no: 3, track: 'Pigs (Three Different Ones'},
+    {no: 4, track: 'Sheep'},
+    {no: 5, track: 'Pigs on the Wing (Part Two)'},
+]
+console.log('reduce animals original array', animals)
+
+let countPigs = animals.reduce((count, el) => { // parameters are count and element
+    return el['track'].includes('Pigs') ? count + 1 : count // callback function returns the track key/value that includes Pigs
+    }, 0)                                                   // if the function does this, then count increases by 1,
+                                                            // otherwise the count remains the same
+                                                            // initial value is 0 (or the first element in object) otherwise would lead to whole object printed
+
+
+console.log(countPigs)
+
 /**18. Conclusion */
+// arrays are data structures that contain multiple values in a specific order. They can hold values of different...
+//... data types and they are re-sizeable.
